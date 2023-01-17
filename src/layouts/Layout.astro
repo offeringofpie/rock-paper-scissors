@@ -1,0 +1,61 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="8bit">
+  <head>
+    <!-- HTML Meta Tags -->
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Rock Paper Scissors (Lizard Spock) battle simulator"
+    />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    /><link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"
+    ></script>
+
+    <meta property="og:url" content="https://rps.jlopes.eu" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rock Paper Scissors (Lizard Spock)" />
+    <meta
+      property="og:description"
+      content="Rock Paper Scissors (Lizard Spock) battle simulator"
+    />
+    <meta property="og:image" content="https://rps.jlopes.eu/rpssl-og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="rps.jlopes.eu" />
+    <meta property="twitter:url" content="https://rps.jlopes.eu" />
+    <meta name="twitter:title" content="Rock Paper Scissors (Lizard Spock)" />
+    <meta
+      name="twitter:description"
+      content="Rock Paper Scissors (Lizard Spock) battle simulator"
+    />
+    <meta name="twitter:image" content="https://rps.jlopes.eu/rpssl-og.jpg" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  html {
+    font-family: "Press Start 2P", monospace;
+    background-color: #f6f6f6;
+  }
+</style>

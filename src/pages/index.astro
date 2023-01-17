@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Canvas from "../components/Canvas";
+import Toggle from "../components/Toggle";
+import Amount from "../components/Amount";
+import Speed from "../components/Speed";
+import Start from "../components/Start";
+import StartBtn from "../components/StartBtn";
+import Winner from "../components/Winner";
+import Instructions from "../components/Instructions";
+---
+
+<Layout title="Rock Paper Scissors (Lizard Spock)">
+  <div class="drawer drawer-end drawer-mobile">
+    <Instructions />
+    <Winner client:load />
+    <input id="drawer" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <!-- Page content here -->
+      <Canvas className="canvas" client:load />
+      <div
+        class="absolute top-0 left-0 right-0 text-5xl leading-3 w-full flex md:hidden justify-between">
+        <StartBtn client:load />
+        <label
+          for="drawer"
+          class="drawer-button cursor-pointer text-primary opacity-80 hover:opacity-100 leading-2 pr-3 pt-3">
+          &#9776;
+        </label>
+      </div>
+    </div>
+    <div class="drawer-side">
+      <label for="drawer" class="drawer-overlay"></label>
+      <aside class="menu p-4 w-80 bg-base-100 text-base-content text-center">
+        <!-- Sidebar content here -->
+        <h2 class="mb-2 uppercase">Select mode:</h2>
+        <Toggle client:load />
+        <h2 class="mt-4 mb-2 uppercase">Select amount:</h2>
+        <Amount client:load />
+        <h2 class="mt-4 mb-2 uppercase">Select speed:</h2>
+        <Speed client:load />
+        <Start client:load />
+        <label for="instructions" class="btn btn-error mt-4">
+          Instructions
+        </label>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .canvas {
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+  }
+
+  .btn {
+    @apply rounded-none;
+  }
+</style>
