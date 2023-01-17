@@ -91,44 +91,13 @@ export default class Play {
           const hunter = this.getClosest(entity, i, "lose");
 
           // if out of bounds
-          if (entity.x > ctx.canvas.width) {
-            entity.x = 0;
-          }
-          if (entity.x < 0) {
-            entity.x = ctx.canvas.width - 1;
-          }
-          if (entity.y > ctx.canvas.height) {
-            entity.y = 0;
-          }
-          if (entity.y < 0) {
-            entity.y = ctx.canvas.height - 1;
-          }
-
+          this.checkBounds(entity, ctx);
           // if close to ally entity
-          if (Math.abs(ally.x - entity.x) < 15) {
-            entity.x += Math.sign(entity.x - ally.x) * this.speed;
-          }
-          if (Math.abs(ally.y - entity.y) < 15) {
-            entity.y += Math.sign(entity.y - ally.y) * this.speed;
-          }
-
+          this.shove(entity, ally, 20, this.speed);
           // if close to hunted entity
-          if (Math.abs(hunted.x - entity.x) > 2) {
-            entity.x += Math.sign(hunted.x - entity.x) * this.speed;
-          }
-
-          if (Math.abs(hunted.y - entity.y) > 2) {
-            entity.y += Math.sign(hunted.y - entity.y) * this.speed;
-          }
-
+          this.moveCloser(entity, hunted, 2, this.speed);
           // if close to hunter entity
-          if (Math.abs(hunter.x - entity.x) > 2) {
-            entity.x -= Math.sign(entity.x - hunter.x) * this.speed;
-          }
-
-          if (Math.abs(hunter.y - entity.y) > 2) {
-            entity.y -= Math.sign(entity.y - hunter.y) * this.speed;
-          }
+          this.moveAway(entity, hunter, 2, this.speed);
 
           ctx.fillText(entity.value as string, entity.x, entity.y);
         });
@@ -138,6 +107,46 @@ export default class Play {
     }
   }
 
+  checkBounds(entity: Entity, ctx: CanvasRenderingContext2D) {
+    if (entity.x > ctx.canvas.width) {
+      entity.x = 0;
+    }
+    if (entity.x < 0) {
+      entity.x = ctx.canvas.width - 1;
+    }
+    if (entity.y > ctx.canvas.height) {
+      entity.y = 0;
+    }
+    if (entity.y < 0) {
+      entity.y = ctx.canvas.height - 1;
+    }
+  }
+  moveCloser(entity: Entity, target: Entity, distance: number, speed: number) {
+    if (Math.abs(target.x - entity.x) > distance) {
+      entity.x += Math.sign(target.x - entity.x) * speed;
+    }
+
+    if (Math.abs(target.y - entity.y) > distance) {
+      entity.y += Math.sign(target.y - entity.y) * speed;
+    }
+  }
+  moveAway(entity: Entity, target: Entity, distance: number, speed: number) {
+    if (Math.abs(target.x - entity.x) > distance) {
+      entity.x -= Math.sign(entity.x - target.x) * speed;
+    }
+
+    if (Math.abs(target.y - entity.y) > distance) {
+      entity.y -= Math.sign(entity.y - target.y) * speed;
+    }
+  }
+  shove(entity: Entity, target: Entity, distance: number, speed: number) {
+    if (Math.abs(target.x - entity.x) < distance) {
+      entity.x += Math.sign(entity.x - target.x) * speed;
+    }
+    if (Math.abs(target.y - entity.y) < distance) {
+      entity.y += Math.sign(entity.y - target.y) * speed;
+    }
+  }
   collision(ent1: Entity, ent2: Entity, state: any) {
     const newEntity =
       ent1.name === "rock"
@@ -152,10 +161,8 @@ export default class Play {
     newEntity.index = ent2.index;
     newEntity.x = ent2.x;
     newEntity.y = ent2.y;
-    // remove losing entity
-    state.entities.splice(ent2.index, 1);
     // replace with cloned entity
-    state.entities.splice(newEntity.index, 0, newEntity);
+    state.entities.splice(ent2.index, 1, newEntity);
   }
 
   getClosest(entity: Entity, i: number, condition: string) {
@@ -208,9 +215,9 @@ export default class Play {
     return same;
   }
 
-  distance(e1: Entity, e2: Entity) {
-    var diffX = e1.x - e2.x;
-    var diffY = e1.y - e2.y;
+  distance(entity: Entity, target: Entity) {
+    var diffX = entity.x - target.x;
+    var diffY = entity.y - target.y;
     return diffX * diffX + diffY * diffY;
   }
 

@@ -33,19 +33,14 @@ const Instructions = (props) => {
             </strong>
           </p>
           <p className="py-4">
-            Inspired by this tweet:
-            <br />
-            <blockquote className="twitter-tweet">
-              <p lang="en" dir="ltr">
-                sorry i can’t come tonight, i’m watching the rock paper scissors
-                simulator season finale{" "}
-                <a href="https://t.co/n4l5xZtVHV">pic.twitter.com/n4l5xZtVHV</a>
-              </p>
-              &mdash; juan (@juanbuis)
-              <a href="https://twitter.com/juanbuis/status/1600155605112496129?ref_src=twsrc%5Etfw">
-                December 6, 2022
-              </a>
-            </blockquote>
+            Inspired by{" "}
+            <a
+              className="link link-primary"
+              href="https://twitter.com/juanbuis/status/1600155605112496129"
+              target="_blank">
+              this tweet
+            </a>
+            .
           </p>
         </label>
       </label>
