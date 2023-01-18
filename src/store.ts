@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const globalStore = {
   ctx: localStorage.getItem("ctx") ? localStorage.getItem("ctx") : null,
-  mode: localStorage.getItem("mode") ? localStorage.getItem("mode") : true,
+  mode: localStorage.getItem("mode") ? localStorage.getItem("mode") : 0,
   play: false,
   restart: false,
   amount: localStorage.getItem("amount") ? localStorage.getItem("amount") : 100,

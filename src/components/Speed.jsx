@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import store from "../store";
 
 const Amount = (props) => {
@@ -30,6 +30,7 @@ const Amount = (props) => {
         max="1"
         defaultValue={speed}
         onMouseUp={onMouseUp}
+        onTouchEnd={onMouseUp}
       />
       <datalist
         id="values"

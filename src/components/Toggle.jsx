@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import store from "../store";
 
 const Toggle = (props) => {
   const state = store.getState();
   const [mode, setMode] = useState(state.mode);
+  const selectRef = useRef();
+
+  useEffect(() => {
+    setMode(state.mode);
+  });
 
   const onChange = (ev) => {
     setMode(ev.target.value);
@@ -16,11 +21,12 @@ const Toggle = (props) => {
   return (
     <select
       className="select select-primary select-md w-full max-w-xs my-2 text-center text-lg border-4"
-      defaultValue={mode}
+      ref={selectRef}
+      value={mode}
       onChange={onChange}>
       <option disabled>Select mode</option>
-      <option value="0">🗿🗞️✂️</option>
-      <option value="1">🗿🗞️✂️🦎🖖</option>
+      <option value={"0"}>🗿🗞️✂️</option>
+      <option value={"1"}>🗿🗞️✂️🦎🖖</option>
     </select>
   );
 };

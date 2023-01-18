@@ -20,8 +20,10 @@ const StartBtn = () => {
     }
   };
   return (
-    <button className="pl-3 pt-3" onClick={handleGame}>
-      {state.play ? "◼" : "⏵"}
+    <button
+      className="pl-3 pt-4 font-sans text-accent leading-4"
+      onClick={handleGame}>
+      {state.play ? "■" : "⏵"}
     </button>
   );
 };
